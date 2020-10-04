@@ -3,6 +3,9 @@ ELTE IK full stack assignment
 
 For the project description look at the [wiki](https://github.com/markkovari/takemehome/wiki).
 
+
+![example workflow name](https://github.com/markkovari/takemehome/workflows/CI/badge.svg)
+
 # Project description
 
 DL: 2020.10.04
