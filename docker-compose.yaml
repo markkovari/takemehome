@@ -6,6 +6,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    networks:
+      - backend
+    depends_on:
+      - mariadb
   mariadb:
     image: mariadb:10.2
     environment:
