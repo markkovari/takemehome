@@ -1,1 +1,3 @@
 mariadb
+node_modules
+.env
