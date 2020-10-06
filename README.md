@@ -67,3 +67,17 @@ User types:
  2. (Registered) User
  3. (Shelter) Admin
  4. Moderator
+
+
+# How to start the application in local development enviromnent
+
+The docker-compose requires installed `docker` and `docker-compose` on the targeted computer.
+
+To run the application in cointainerized mode:
+```sh
+docker-compose up # for compose start
+docker-compose up -d # for compose start in detached mode (background)
+docker-compose down # for fraceful shutdown
+```
+
+Beside that, you can build and run the docker containers individually.

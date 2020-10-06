@@ -1,0 +1,25 @@
+version: '3.4'
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+  mariadb:
+    image: mariadb:10.2
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: takemehome
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+    networks:
+      - backend
+    restart: on-failure
+    volumes:
+     - ${PWD}/mariadb:/var/lib/mysql
+
+networks:
+  backend:
+    driver: bridge
+
