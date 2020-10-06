@@ -2,8 +2,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UserService } from './user/user.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './entities/user.entity';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) =>
         ({
-          entities: [],
+          entities: [User],
           type: 'mariadb',
           host: configService.get('DATABASE_HOST', 'localhost'),
           port: configService.get('DATABASE_PORT', 3306),
@@ -23,10 +24,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
           password: configService.get('DATABASE_PASSWORD'),
           database: configService.get('DATABASE_DATABASE'),
           synchronize: true,
+          autoLoadEntities: true,
         })
     }),
+    UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService, UserService],
+  providers: [AppService],
+  exports: []
 })
 export class AppModule { }
