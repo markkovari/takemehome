@@ -1,24 +1,37 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, Injectable, Module } from '@nestjs/common';
 import * as request from 'supertest';
+import { User } from './../src/entities/user.entity';
 import { AppModule } from './../src/app.module';
+import { UsersService } from './../src/user/user.service';
+import { AppController } from './../src/app.controller';
+
+@Injectable()
+class UserServiceMock {
+  async findAll() :Promise<User[]> {
+    return [];
+  }
+}
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
+  let usrService = { findAll: () => Promise.resolve([]) };
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
+      imports: [],
+    })
+    .compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  it('/ (GET)', async() => {
+    expect(app).toBeDefined();
+  });
+
+  afterAll(async () => {
+    await app.close();
   });
 });
