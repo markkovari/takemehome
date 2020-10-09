@@ -73,7 +73,7 @@ User types:
 
 To load the credentials in development phase copy/create an environment file.
 
-Like `cp ./backend/.env.copy ./backend/.env`.
+Like `cp /.env.copy /.env`.
 
 
 The docker-compose requires installed `docker` and `docker-compose` on the targeted computer.
