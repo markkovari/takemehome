@@ -10,6 +10,8 @@ services:
       - backend
     depends_on:
       - mariadb
+    env_file:
+      - .env
   mariadb:
     image: mariadb:10.2
     environment:
