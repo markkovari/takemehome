@@ -71,13 +71,18 @@ User types:
 
 # How to start the application in local development enviromnent
 
+To load the credentials in development phase copy/create an environment file.
+
+Like `cp ./backend/.env.copy ./backend/.env`.
+
+
 The docker-compose requires installed `docker` and `docker-compose` on the targeted computer.
 
 To run the application in cointainerized mode:
 ```sh
 docker-compose up # for compose start
 docker-compose up -d # for compose start in detached mode (background)
-docker-compose down # for fraceful shutdown
+docker-compose down # for graceful shutdown
 ```
 
 Beside that, you can build and run the docker containers individually.
