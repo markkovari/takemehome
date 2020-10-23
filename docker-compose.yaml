@@ -5,7 +5,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "3014:3014"
     networks:
       - backend
     depends_on:
