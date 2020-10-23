@@ -3,31 +3,30 @@ import { INestApplication, Injectable, Module } from '@nestjs/common';
 import * as request from 'supertest';
 import { User } from './../src/entities/user.entity';
 import { AppModule } from './../src/app.module';
-import { UsersService } from './../src/user/user.service';
+import { UsersService } from './../src/users/users.service';
 import { AppController } from './../src/app.controller';
 
 @Injectable()
 class UserServiceMock {
-  async findAll() :Promise<User[]> {
+  async findAll(): Promise<User[]> {
     return [];
   }
 }
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
-  let usrService = { findAll: () => Promise.resolve([]) };
+  let usersService = { findAll: () => Promise.resolve([]) };
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [],
-    })
-    .compile();
+    }).compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
   });
 
-  it('/ (GET)', async() => {
+  it('/ (GET)', async () => {
     expect(app).toBeDefined();
   });
 
