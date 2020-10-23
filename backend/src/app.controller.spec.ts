@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
-import { UsersService } from './user/user.service';
+import { UsersService } from './users/users.service';
 import { User } from './entities/user.entity';
 
 class DeviceServiceMock {
@@ -15,11 +15,13 @@ describe('AppController', () => {
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
-      providers: [UsersService,
+      providers: [
+        UsersService,
         {
           provide: UsersService,
           useValue: new DeviceServiceMock(),
-      }],
+        },
+      ],
     }).compile();
 
     appController = app.get<AppController>(AppController);

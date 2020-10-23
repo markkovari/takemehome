@@ -1,12 +1,10 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { User } from './entities/user.entity';
-import { UsersService } from './user/user.service';
+import { UsersService } from './users/users.service';
 
 @Controller()
 export class AppController {
-  constructor(
-    private readonly userService: UsersService,
-  ) { }
+  constructor(private readonly userService: UsersService) {}
 
   @Get()
   getUsers() {

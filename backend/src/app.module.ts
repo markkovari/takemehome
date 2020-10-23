@@ -3,34 +3,39 @@ import { AppController } from './app.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { UserModule } from './user/user.module';
-import { UsersService } from './user/user.service';
+import { UserModule } from './users/users.module';
+import { UsersService } from './users/users.service';
+import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true
+      isGlobal: true,
+    }),
+    GraphQLModule.forRoot({
+      typePaths: ['./**/*.graphql'],
+      installSubscriptionHandlers: true,
+      playground: true,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: async (configService: ConfigService) =>
-        ({
-          entities: [User],
-          type: 'mariadb',
-          host: configService.get('DATABASE_HOST', 'localhost'),
-          port: configService.get('DATABASE_PORT', 3306),
-          username: configService.get('DATABASE_USER', 'root'),
-          password: configService.get('DATABASE_PASSWORD'),
-          database: configService.get('DATABASE_DATABASE'),
-          synchronize: true,
-          autoLoadEntities: true,
-        })
+      useFactory: async (configService: ConfigService) => ({
+        entities: [User],
+        type: 'mariadb',
+        host: configService.get('DATABASE_HOST', 'localhost'),
+        port: configService.get('DATABASE_PORT', 3306),
+        username: configService.get('DATABASE_USER', 'root'),
+        password: configService.get('DATABASE_PASSWORD'),
+        database: configService.get('DATABASE_DATABASE'),
+        synchronize: true,
+        autoLoadEntities: true,
+      }),
     }),
     UserModule,
   ],
   controllers: [AppController],
   providers: [UsersService],
-  exports: []
+  exports: [],
 })
-export class AppModule { }
+export class AppModule {}
