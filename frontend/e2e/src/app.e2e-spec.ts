@@ -8,9 +8,10 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display title', async () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('frontend app is running!');
+    console.log(await page.getTitleText());
+    expect(page.getTitleText()).toEqual('Take me home');
   });
 
   afterEach(async () => {
