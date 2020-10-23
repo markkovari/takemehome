@@ -22,3 +22,5 @@ jobs:
     - run: cd backend && yarn
     - run: cd backend && yarn test
     - run: cd backend && yarn test:e2e
+    - run: cd frontend && yarn
+    - run: cd frontend && yarn test:headless

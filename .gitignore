@@ -1,3 +1,4 @@
 mariadb
 node_modules
 .env
+.idea
