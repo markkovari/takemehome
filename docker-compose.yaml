@@ -1,4 +1,4 @@
-version: '3.4'
+version: "3.4"
 services:
   frontend:
     build:
@@ -20,8 +20,11 @@ services:
       - "3014:3014"
     networks:
       - backend
+    restart: on-failure
     depends_on:
       - mariadb
+    links:
+      - mariadb:3306
     env_file:
       - .env
   mariadb:
@@ -31,13 +34,14 @@ services:
       MYSQL_DATABASE: takemehome
       MYSQL_USER: root
       MYSQL_PASSWORD: password
+    ports:
+      - "3316:3306"
     networks:
       - backend
     restart: on-failure
     volumes:
-     - ${PWD}/mariadb:/var/lib/mysql
+      - ${PWD}/mariadb:/var/lib/mysql
 
 networks:
   backend:
     driver: bridge
-
