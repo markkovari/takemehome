@@ -1,0 +1,31 @@
+<div class="login-container">
+  <form>
+    <mat-form-field class="base" hintLabel="valid email" appearance="fill">
+      <mat-label>email</mat-label>
+      <input matInput val [formControl]="email" type="email" required />
+      <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="base">
+      <mat-label>Enter your password</mat-label>
+      <input
+        type="password"
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        [formControl]="password"
+        autocomplete="current-password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button mat-button class="base" (click)="login()">Login</button>
+  </form>
+</div>

@@ -1,25 +1,67 @@
-<router-outlet></router-outlet>
-
 <mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
-  </mat-drawer>
+  <app-sidebar></app-sidebar>
 
   <mat-drawer-content>
     <mat-toolbar color="primary">
-      <button (click)="drawer.toggle()"
-              mat-icon-button color="secondary" aria-label="Example icon-button with menu icon">
+      <button
+        (click)="toggle()"
+        mat-raised-button
+        color="secondary"
+        aria-label="Example icon-button with menu icon"
+      >
         <mat-icon>menu</mat-icon>
       </button>
-      <span>Take me home</span>
+      <button
+        routerLink="/"
+        mat-button
+        color="secondary"
+        outerLinkActive="active"
+        class="login"
+        aria-label="Login button"
+      >
+        Take me home
+      </button>
       <span class="example-spacer"></span>
-      <button mat-icon-button color="secondary" class="favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <button mat-icon-button color="secondary" aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
-      </button>
+      <div class="toolbar-user">
+        <ng-container *ngIf="isAuthed(); else elseTemplate">
+          <div class="loggedin">
+            <p>hello {{ getUserName() }}</p>
+            <button
+              mat-raised-button
+              color="secondary"
+              outerLinkActive="active"
+              aria-label="Login button"
+              (click)="logout()"
+            >
+              Logout
+            </button>
+          </div>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <button
+            routerLink="register"
+            mat-raised-button
+            color="secondary"
+            outerLinkActive="active"
+            class="login"
+            aria-label="Login button"
+          >
+            Register
+          </button>
+          <button
+            routerLink="login"
+            mat-raised-button
+            color="secondary"
+            routerLinkActive="active"
+            class="login"
+            aria-label="Login button"
+          >
+            Login
+          </button>
+        </ng-template>
+      </div>
     </mat-toolbar>
   </mat-drawer-content>
-
 </mat-drawer-container>
+
+<router-outlet></router-outlet>
