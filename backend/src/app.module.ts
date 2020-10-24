@@ -16,6 +16,10 @@ import { AuthModule } from './auth/auth.module';
       typePaths: ['./**/*.graphql'],
       installSubscriptionHandlers: true,
       playground: true,
+      cors: {
+        origin: 'http://localhost:4200',
+        credentials: true,
+      },
       context: ({ req }) => ({ req }),
     }),
     TypeOrmModule.forRootAsync({
