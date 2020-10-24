@@ -7,19 +7,21 @@
 /* tslint:disable */
 /* eslint-disable */
 export class CreateUserInput {
-    name?: string;
-    email?: string;
-    password?: string;
+    name: string;
+    email: string;
+    password: string;
 }
 
 export abstract class IQuery {
     abstract getUsers(): User[] | Promise<User[]>;
 
     abstract user(id: string): User | Promise<User>;
+
+    abstract login(email: string, password: string): AuthPayload | Promise<AuthPayload>;
 }
 
 export abstract class IMutation {
-    abstract createUser(createUserInput?: CreateUserInput): User | Promise<User>;
+    abstract createUser(createUserInput: CreateUserInput): User | Promise<User>;
 }
 
 export abstract class ISubscription {
@@ -27,7 +29,12 @@ export abstract class ISubscription {
 }
 
 export class User {
-    id?: number;
-    name?: string;
-    email?: string;
+    id: number;
+    name: string;
+    email: string;
+}
+
+export class AuthPayload {
+    access_token: string;
+    user: User;
 }

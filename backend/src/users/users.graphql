@@ -1,10 +1,11 @@
 type Query {
   getUsers: [User]
-  user(id: ID!): User
+  user(id: ID!): User!
+  login(email: String!, password: String!): AuthPayload!
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput): User
+  createUser(createUserInput: CreateUserInput!): User!
 }
 
 type Subscription {
@@ -12,13 +13,18 @@ type Subscription {
 }
 
 type User {
-  id: Int
-  name: String
-  email: String
+  id: Int!
+  name: String!
+  email: String!
+}
+
+type AuthPayload {
+  access_token: String!
+  user: User!
 }
 
 input CreateUserInput {
-  name: String
-  email: String
-  password: String
+  name: String!
+  email: String!
+  password: String!
 }

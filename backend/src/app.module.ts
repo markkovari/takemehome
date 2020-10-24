@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { UserModule } from './users/users.module';
 import { UsersService } from './users/users.service';
 import { GraphQLModule } from '@nestjs/graphql';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +16,7 @@ import { GraphQLModule } from '@nestjs/graphql';
       typePaths: ['./**/*.graphql'],
       installSubscriptionHandlers: true,
       playground: true,
+      context: ({ req }) => ({ req }),
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -33,9 +34,7 @@ import { GraphQLModule } from '@nestjs/graphql';
       }),
     }),
     UserModule,
+    AuthModule,
   ],
-  controllers: [AppController],
-  providers: [UsersService],
-  exports: [],
 })
 export class AppModule {}
