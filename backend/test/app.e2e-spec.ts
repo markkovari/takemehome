@@ -2,9 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, Injectable, Module } from '@nestjs/common';
 import * as request from 'supertest';
 import { User } from './../src/entities/user.entity';
-import { AppModule } from './../src/app.module';
-import { UsersService } from './../src/users/users.service';
-import { AppController } from './../src/app.controller';
 
 @Injectable()
 class UserServiceMock {
