@@ -2,7 +2,14 @@
   <form>
     <mat-form-field class="base" hintLabel="valid email" appearance="fill">
       <mat-label>email</mat-label>
-      <input matInput val [formControl]="email" type="email" required />
+      <input
+        matInput
+        val
+        [formControl]="email"
+        type="email"
+        required
+        autocomplete="email"
+      />
       <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
     </mat-form-field>
 

@@ -1,1 +1,63 @@
-<p>register works!</p>
+<div class="register-container">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="base" hintLabel="username" appearance="fill">
+      <mat-label>username</mat-label>
+      <input matInput val formControlName="username" type="text" required />
+    </mat-form-field>
+    <mat-form-field class="base" hintLabel="valid email" appearance="fill">
+      <mat-label>email</mat-label>
+      <input matInput val formControlName="email" type="email" required />
+      <mat-error *ngIf="f.email.errors?.aleradyExists"
+        >Email is already taken</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="base">
+      <mat-label>Enter your password</mat-label>
+      <input
+        type="password"
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        formControlName="password"
+        autocomplete="current-password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="base">
+      <mat-label>Enter your password once again</mat-label>
+      <input
+        type="password"
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        formControlName="confirmPassword"
+        autocomplete="current-password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      <mat-error *ngIf="f.confirmPassword.errors?.required"
+        >Confirm Password is required</mat-error
+      >
+      <mat-error *ngIf="f.confirmPassword.errors?.mustMatch"
+        >Passwords must match</mat-error
+      >
+    </mat-form-field>
+
+    <button mat-button class="base" type="submit">Register</button>
+  </form>
+</div>
