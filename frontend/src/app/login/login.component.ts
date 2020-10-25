@@ -31,8 +31,12 @@ export class LoginComponent implements OnInit {
     if (this.email.hasError('required')) {
       return 'You must enter a value';
     }
-
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    if (this.email.hasError('email')) {
+      return 'Not a valid email';
+    }
+    if (this.email.hasError('notPresent')) {
+      return 'The user does not exists with this email password combination';
+    }
   }
 
   login() {
@@ -55,14 +59,19 @@ export class LoginComponent implements OnInit {
           password: this.password.value,
         },
       })
-      .subscribe((data) => {
-        if (!data.errors) {
-          this.authService.setToken((data.data as any).login.access_token);
-          this.authService.setCurrentUser(
-            (data.data as any).login.user as User
-          );
-          this.router.navigate(['/home']);
+      .subscribe(
+        (data) => {
+          if (!data.errors) {
+            this.authService.setToken((data.data as any).login.access_token);
+            this.authService.setCurrentUser(
+              (data.data as any).login.user as User
+            );
+            this.router.navigate(['/home']);
+          }
+        },
+        (error) => {
+          this.email.setErrors({ notPresent: true });
         }
-      });
+      );
   }
 }

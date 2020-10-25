@@ -24,6 +24,11 @@ export class GraphqlModule {
       link: httpLink.create({ uri, headers }),
       cache: new InMemoryCache(),
       resolvers: {},
+      defaultOptions: {
+        watchQuery: {
+          errorPolicy: 'ignore',
+        },
+      },
     });
   }
 }
