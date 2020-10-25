@@ -2,11 +2,25 @@
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="base" hintLabel="username" appearance="fill">
       <mat-label>username</mat-label>
-      <input matInput val formControlName="username" type="text" required />
+      <input
+        matInput
+        val
+        formControlName="username"
+        type="text"
+        required
+        autocomplete="username"
+      />
     </mat-form-field>
     <mat-form-field class="base" hintLabel="valid email" appearance="fill">
       <mat-label>email</mat-label>
-      <input matInput val formControlName="email" type="email" required />
+      <input
+        matInput
+        val
+        formControlName="email"
+        type="email"
+        autocomplete="email"
+        required
+      />
       <mat-error *ngIf="f.email.errors?.aleradyExists"
         >Email is already taken</mat-error
       >
